@@ -32,6 +32,7 @@ def initialize_server():
 
 def do_something():
     global is_playing
+    
     try:
         while not stop_event.is_set():
             logger.info("Try playing audio: " + AUDIO_FILE_PATH)
@@ -46,6 +47,7 @@ def do_something():
 
 def start_thread():
     global audio_thread, is_playing
+
     if is_playing:
         logger.info("Thread is already running.")
         return
@@ -70,16 +72,10 @@ def get_current_volume():
     interface = devices.Activate(
         IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     volume = cast(interface, POINTER(IAudioEndpointVolume))
+    logger.info("Getting current volume: ")
     return int(volume.GetMasterVolumeLevelScalar() * 100)
 
-def set_volume(volume_level):
-    devices = AudioUtilities.GetSpeakers()
-    interface = devices.Activate(
-        IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-    volume = cast(interface, POINTER(IAudioEndpointVolume))
-    volume.SetMasterVolumeLevelScalar(volume_level, None)
-
-def set_volume1(left_volume, right_volume):
+def set_volume(left_volume, right_volume):
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(
         IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
@@ -101,7 +97,7 @@ def main():
             logger.info(("Received command: ", data))
             check_command(data)
 
-            alarm_status = {"status": "Alarm Activated" if is_playing else "Alarm Deactivated"}
+            alarm_status = "Alarm Activated" if is_playing else "Alarm Deactivated"
             clientsocket.sendall(json.dumps(alarm_status).encode())
             logger.info("Sending reply: " + json.dumps(alarm_status))
             clientsocket.close()  # Close the client socket
