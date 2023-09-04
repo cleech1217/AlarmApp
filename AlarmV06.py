@@ -35,13 +35,13 @@ def handle_connection(client_socket):
             # Handle the command and send a response
             if command == 'Alarm Status':
                 #set alarm status
-                response = 'Sending alarm status...'
+                response = 'Alarm status...'
             elif command == 'Activate':
                 #Activate alarm
-                response = 'Alarm activate'
+                response = 'Alarm active'
             elif command == 'Deactivate':
                 #Deactivate alarm
-                response = 'Alarm inactivate'
+                response = 'Alarm inactive'
             else:
                 response = 'Unknown Command'
             

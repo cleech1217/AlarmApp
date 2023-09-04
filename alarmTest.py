@@ -1,5 +1,6 @@
 import socket
 from zeroconf import Zeroconf, ServiceBrowser, ServiceStateChange
+import time
 
 # Define the service type to discover
 SERVICE_TYPE = "_myservice._tcp.local."
@@ -65,7 +66,7 @@ def send_command(command):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    while True:
+    """while True:
         # Input a command from the user
         command = input("Enter a command (or 'exit' to quit): ")
         if command.lower() == 'exit':
@@ -73,6 +74,14 @@ if __name__ == "__main__":
 
         # Send the command to the discovered server
         send_command(command)
+    """
+    test_command = ["Alarm Status", "Activate", "Deactivate"]
+
+    for test in test_command:
+        send_command(test)
+        time.sleep(1)
+        send_command(test_command[0])
+        time.sleep(3)
 
 # Clean up Zeroconf
 zeroconf.close()
