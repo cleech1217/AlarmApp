@@ -9,6 +9,7 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import json
 
+
 # Constants
 HOST = socket.gethostbyname(socket.gethostname())
 PORT = 49152
