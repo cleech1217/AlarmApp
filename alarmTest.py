@@ -66,17 +66,7 @@ def send_command(command):
     except Exception as e:
         print(f"Error: {e}")
 
-if __name__ == "__main__":
-    """while True:
-        # Input a command from the user
-        command = input("Enter a command (or 'exit' to quit): ")
-        if command.lower() == 'exit':
-            break
-
-        # Send the command to the discovered server
-        send_command(command)
-    """
-    test_command = ["Alarm Status", "Activate", "Deactivate"]
+def test_commands():
     send_command(test_command[1])
     for test in test_command:
         send_command(test)
@@ -85,5 +75,27 @@ if __name__ == "__main__":
     send_command(test_command[1])
     time.sleep(3)
     send_command(test_command[2])
+
+def test_status():
+    try:
+        while True:
+            send_command(test_command[0])
+            time.sleep(0)
+    except Exception as e:
+        print(e)
+
+
+if __name__ == "__main__":
+    test_command = ["Alarm Status", "Activate", "Deactivate"]
+    
+    try:
+        #test_commands()
+        send_command(test_command[1])
+        time.sleep(3)
+        send_command(test_command[2])
+        test_status()
+    except Exception as e:
+        print(e)
+
 # Clean up Zeroconf
 zeroconf.close()
