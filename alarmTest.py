@@ -55,6 +55,7 @@ def send_command(command):
 
         # Send the command to the server
         client_socket.send(command.encode('utf-8'))
+        print(f"Sending Command: {command}")
 
         # Receive and print the server's response
         response = client_socket.recv(1024).decode('utf-8')
@@ -80,11 +81,9 @@ if __name__ == "__main__":
     for test in test_command:
         send_command(test)
         time.sleep(1)
-        
-        send_command(test_command[0])
-        time.sleep(7)
 
     send_command(test_command[1])
+    time.sleep(3)
     send_command(test_command[2])
 # Clean up Zeroconf
 zeroconf.close()
