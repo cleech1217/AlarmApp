@@ -76,12 +76,15 @@ if __name__ == "__main__":
         send_command(command)
     """
     test_command = ["Alarm Status", "Activate", "Deactivate"]
-
+    send_command(test_command[1])
     for test in test_command:
         send_command(test)
         time.sleep(1)
+        
         send_command(test_command[0])
-        time.sleep(3)
+        time.sleep(7)
 
+    send_command(test_command[1])
+    send_command(test_command[2])
 # Clean up Zeroconf
 zeroconf.close()

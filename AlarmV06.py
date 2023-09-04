@@ -1,6 +1,7 @@
 import socket
 import threading
 from zeroconf import ServiceInfo, Zeroconf
+import playAlarm
 
 # Define the service name and port
 SERVICE_NAME = "MyService"
@@ -38,9 +39,11 @@ def handle_connection(client_socket):
                 response = 'Alarm status...'
             elif command == 'Activate':
                 #Activate alarm
+                playAlarm.start_thread()
                 response = 'Alarm active'
             elif command == 'Deactivate':
                 #Deactivate alarm
+                playAlarm.stop_thread()
                 response = 'Alarm inactive'
             else:
                 response = 'Unknown Command'
