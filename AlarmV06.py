@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Define the service name and port
-SERVICE_NAME = "MyService"
+SERVICE_NAME = "Alarm Service"
 PORT = 12345
 
 # Initialize Zeroconf
@@ -21,9 +21,10 @@ properties = {
     "description": "My Service Description",
     "path": "/my-service-path",
 }
-
-info = ServiceInfo("_myservice._tcp.local.",
-                   f"{SERVICE_NAME}._myservice._tcp.local.",
+ #[socket.inet_pton(socket.AF_INET, socket.gethostbyname(socket.gethostname()))],
+ #socket.inet_pton(socket.AF_INET, '127.0.0.1'),
+info = ServiceInfo("_http._tcp.local.",
+                   f"{SERVICE_NAME}._http._tcp.local.",
                    addresses=[socket.inet_pton(socket.AF_INET, socket.gethostbyname(socket.gethostname()))],
                    port=PORT,
                    properties=properties)
